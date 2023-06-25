@@ -1,8 +1,12 @@
 import React from 'react';
 import { toast, Toaster, ToastBar } from 'react-hot-toast';
+import { Routes, Route, useLocation } from 'react-router-dom';
+import { AnimatePresence } from 'framer-motion';
+import { Home } from './pages';
 import './App.css';
 
 function App() {
+  const location = useLocation();
 
   return (
     // React.Fragment is a good way to organize components and pages if you dont have a parent container.
@@ -36,9 +40,14 @@ function App() {
           </ToastBar>
         )}
       </Toaster>
-      <button onClick={() => toast.success("Button Clicked!")}>Test Toast</button>
-      {/* Routes will go in here either with animated routes or just react-router-dom */}
+      {/* Routes will go in here either with animated routes and react-router-dom */}
       {/* Here will be our routing component to animate page transitions */}
+      <AnimatePresence>
+        {/* context providers will wrap these routes */}
+        <Routes location={location} key={location}>
+          <Route exact path="/" element={<Home />} />
+        </Routes>
+      </AnimatePresence>
     </React.Fragment>
   )
 }
