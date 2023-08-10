@@ -34,7 +34,7 @@ jobs:
         id: node-cache
         uses: actions/cache@v3
         with: 
-          path: '**/node_modules'
+          path: ./node_modules
           key: ${{ runner.os }}-modules-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-modules-
@@ -48,8 +48,7 @@ jobs:
         uses: actions/cache/save@v3
         with:
           path: |
-            ${{ steps.node-cache-dir-path.outputs.dir }}
-            some/other/dependencies
+            ./node_modules
           key: ${{ steps.node-cache.outputs.cache-primary-key }}
 
 #      - name: Create .env File
