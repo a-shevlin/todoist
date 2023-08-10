@@ -3,11 +3,13 @@ on: workflow_dispatch
 
 jobs: 
   initialize-project:
-    runs-on: ubuntu-latest
+    uses: a-shevlin/todoist/.github/workflows/setup-and-install-node@main
+    
 #    defaults:
 #      run:
 #        working-directory: frontend
-    
+  pull-cache-and-build:
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -16,8 +18,13 @@ jobs:
         run: |
           ls ${{ github.workspace }}
         
-      - name: Setup Node Cache
-        uses: ./.github/actions/setup-node/action.yml
+      - name: Restore cached package
+        id: cached-node-restore
+        uses: actions/cache/restore@v3
+        with: 
+          path: |
+            /home/runner/.npm
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/package-lock.json') }}
         
       - name: Build Dist
         run: npm run build
