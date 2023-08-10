@@ -1,0 +1,25 @@
+name: On Dependency Update
+description: Triggers an update to the app's cache when a dependency list changes.
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      # Run only on main
+      - 'main'
+    paths:
+      - 'package-lock.json'
+      
+jobs:
+  rebuild-unix-cache:
+    name: Rebuild Node Cache
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+      
+      - name: Rebuild cache
+        uses: ./.github/actions/setup-node
+        
+  rebuild-macos-cache:
+        
