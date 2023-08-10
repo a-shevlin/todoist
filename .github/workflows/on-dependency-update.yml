@@ -1,5 +1,5 @@
 name: On Dependency Update
-description: Triggers an update to the app's cache when a dependency list changes.
+run-name: ${{ github.actor }} is rebuilding cache
 
 on:
   workflow_dispatch:
@@ -12,7 +12,7 @@ on:
       
 jobs:
   rebuild-unix-cache:
-    name: Rebuild Node Cache
+    name: Rebuild Unix Cache
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
@@ -22,4 +22,12 @@ jobs:
         uses: ./.github/actions/setup-node
         
   rebuild-macos-cache:
+    name: Rebuild MacOS Cache
+    runs-on: macos-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
         
+      - name: Rebuild Cache
+        uses: ./.github/actions/setup-node
+      
