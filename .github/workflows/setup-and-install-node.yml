@@ -2,7 +2,7 @@ name: Node Setup
 run-name: Install React Dependencies (nodejs package-lock.json) with caching.
 
 on: 
-  workflow_dispatch:
+  workflow_call:
     inputs:
       namable-input:
         description: 'descriptor for what is passed down from calling workfrlow'
