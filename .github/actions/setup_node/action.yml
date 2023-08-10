@@ -1,4 +1,6 @@
-name: Run CI Process for App
+name: Node Setup
+description: Install React Dependencies (nodejs package-lock.json) with caching.
+
 on: 
   workflow_call:
     inputs:
@@ -14,21 +16,27 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Setup and Cache Node
+      - name: Setup Node
         uses: actions/setup-node@v3
         with:
           token: ${{secrets.GITHUB_TOKEN}}
           node-version: 18.x
           cache: 'npm'
-          cache-dependency-path: ./package-lock.json
+
+
+      - name: Cache Node Package
+        id: package-cache
+        uses: actions/cache@v3
+        with: 
+          path: ./node_modules
+          key: ${{ runner.os }}-modules-${{ hashFiles('package-lock.json')}}
           
-      - name: Install dependencies
-        run: npm install
+      - name: Install dependencies if necessary
+        if: steps.package-cache.outpus.cache-hit != 'true
+        run: npm ci
 
 #      - name: Create .env File
 #        run: |
 #          touch .env
 #          echo VITE_APP_MAPBOX_TOKEN=${{ secrets.VITE_APP_MAPBOX_TOKEN }} >> .env
       
-      - name: Build Dist
-        run: npm run build

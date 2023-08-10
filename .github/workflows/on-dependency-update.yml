@@ -1,0 +1,33 @@
+name: On Dependency Update
+run-name: ${{ github.actor }} is rebuilding cache
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      # Run only on main
+      - 'main'
+    paths:
+      - 'package-lock.json'
+      
+jobs:
+  rebuild-unix-cache:
+    name: Rebuild Unix Cache
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+      
+      - name: Rebuild cache
+        uses: ./.github/actions/setup-node
+        
+  rebuild-macos-cache:
+    name: Rebuild MacOS Cache
+    runs-on: macos-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+        
+      - name: Rebuild Cache
+        uses: ./.github/actions/setup-node
+      
