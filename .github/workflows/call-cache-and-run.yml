@@ -1,5 +1,5 @@
 name: TEST Call Cache and Run on Push
-on: pull_request
+on: workflow_dispatch
 
 jobs: 
   initialize-project:
