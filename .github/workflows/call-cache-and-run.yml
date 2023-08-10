@@ -23,7 +23,7 @@ jobs:
         uses: actions/cache/restore@v3
         with: 
           path: |
-            /home/runner/.npm
+            ./node_modules
           key: ${{ runner.os }}-modules-${{ hashFiles('**/package-lock.json') }}
         
       - name: Build Dist
