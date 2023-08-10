@@ -24,10 +24,12 @@ jobs:
           
       - name: Get Node Version
         id: node-version
+        shell: bash
         run: echo "version=$(node -v)" >> ${GITHUB_OUTPUT}
         
       - name: Get Node cache directory
         id: node-cache-dir-path
+        shell: bash
         run: echo "dir=$(npm config get cache)" >> ${GITHUB_OUTPUT}
 
       - name: Cache Node Package
