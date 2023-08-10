@@ -31,8 +31,5 @@ jobs:
         
       - name: Build Dist
         run: npm run build
-        
-      - name: create dev instance
-        run: npm run dev
     
     #TODO: implement remaining firebase 
