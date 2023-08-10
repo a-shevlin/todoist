@@ -17,7 +17,7 @@ jobs:
           ls ${{ github.workspace }}
         
       - name: Setup Node Cache
-        uses: ./.github/actions/setup-node@a-shevlin-patch-1
+        uses: ./.github/actions/setup-node/action.yml
         
       - name: Build Dist
         run: npm run build
