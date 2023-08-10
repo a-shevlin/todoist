@@ -32,7 +32,7 @@ jobs:
           key: ${{ runner.os }}-modules-${{ hashFiles('package-lock.json')}}
           
       - name: Install dependencies if necessary
-        if: steps.package-cache.outpus.cache-hit != 'true
+        if: steps.package-cache.outpus.cache-hit != 'true'
         run: npm ci
 
 #      - name: Create .env File
