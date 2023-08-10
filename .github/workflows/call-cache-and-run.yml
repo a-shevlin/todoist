@@ -3,7 +3,7 @@ on: workflow_dispatch
 
 jobs: 
   initialize-project:
-    uses: a-shevlin/todoist/.github/workflows/setup-and-install-node@main
+    uses: a-shevlin/todoist/.github/workflows/setup-and-install-node.yml@main
     
 #    defaults:
 #      run:
