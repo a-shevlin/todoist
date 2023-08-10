@@ -12,8 +12,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
         
+      - name: Check files in github actions
+        run: |
+          ls ${{ github.workspace/ }}
+        
       - name: Setup Node Cache
-        uses: ./.github/actions/setup-node
+        uses: ./.github/actions/setup-node@a-shevlin-patch-1
         
       - name: Build Dist
         run: npm run build
